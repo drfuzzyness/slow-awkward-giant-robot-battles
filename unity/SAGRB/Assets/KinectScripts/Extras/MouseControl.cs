@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
 
-public class MouseControl
+public class MouseControl : MonoBehaviour 
 {
     // Import function mouse_event() from WinApi
     [DllImport("User32.dll")] 
@@ -24,8 +24,8 @@ public class MouseControl
         Absolute = 0x8000,
         }
                 
-//    public static int MouseXSpeedCoef = 45000; // Cursor rate in Х direction
-//    public static int MouseYSpeedCoef = 45000; // Cursor rate in Y direction
+    public static int MouseXSpeedCoef = 45000; // Cursor rate in Х direction
+    public static int MouseYSpeedCoef = 45000; // Cursor rate in Y direction
 
     // Public function to move the mouse cursor to the specified position
     public static void MouseMove(Vector3 screenCoordinates)
@@ -42,18 +42,6 @@ public class MouseControl
     public static void MouseClick()
     {
         mouse_event(MouseFlags.LeftDown, 0, 0, 0, System.UIntPtr.Zero);
-        mouse_event(MouseFlags.LeftUp, 0, 0, 0, System.UIntPtr.Zero);
-    }
-	
-    // Public function to emulate a mouse drag event (left button)
-    public static void MouseDrag()
-    {
-        mouse_event(MouseFlags.LeftDown, 0, 0, 0, System.UIntPtr.Zero);
-    }
-	
-    // Public function to emulate a mouse release event (left button)
-    public static void MouseRelease()
-    {
         mouse_event(MouseFlags.LeftUp, 0, 0, 0, System.UIntPtr.Zero);
     }
 	

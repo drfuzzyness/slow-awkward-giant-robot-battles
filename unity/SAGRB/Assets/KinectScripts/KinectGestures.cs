@@ -93,6 +93,20 @@ public class KinectGestures
 	private const int rightHipIndex = (int)KinectWrapper.SkeletonJoint.RIGHT_HIP;
 	
 	
+	private static int[] neededJointIndexes = {
+		leftHandIndex, rightHandIndex, leftElbowIndex, rightElbowIndex, leftShoulderIndex, rightShoulderIndex,
+		hipCenterIndex, shoulderCenterIndex, leftHipIndex, rightHipIndex
+	};
+	
+	
+	// Returns the list of the needed gesture joint indexes
+	public static int[] GetNeededJointIndexes()
+	{
+		return neededJointIndexes;
+	}
+	
+	
+	
 	private static void SetGestureJoint(ref GestureData gestureData, float timestamp, int joint, Vector3 jointPos)
 	{
 		gestureData.joint = joint;

@@ -20,8 +20,8 @@ public class SimpleGestureListener : MonoBehaviour, KinectGestures.GestureListen
 		manager.DetectGesture(userId, KinectGestures.Gestures.Push);
 		manager.DetectGesture(userId, KinectGestures.Gestures.Pull);
 		
-//		manager.DetectGesture(userId, KinectWrapper.Gestures.SwipeUp);
-//		manager.DetectGesture(userId, KinectWrapper.Gestures.SwipeDown);
+		//manager.DetectGesture(userId, KinectGestures.Gestures.SwipeUp);
+		//manager.DetectGesture(userId, KinectGestures.Gestures.SwipeDown);
 		
 		if(GestureInfo != null)
 		{

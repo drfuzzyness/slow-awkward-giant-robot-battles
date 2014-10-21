@@ -19,7 +19,7 @@ public class SetSceneAvatars : MonoBehaviour
 				manager.Player1Avatars.Add(avatar.gameObject);
 			}
 			
-			manager.ResetAvatarControllers();
+			manager.SetAvatarControllers();
 		}
 	}
 	
