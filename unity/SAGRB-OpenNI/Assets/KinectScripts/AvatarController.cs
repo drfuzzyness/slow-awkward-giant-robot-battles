@@ -16,7 +16,7 @@ public class AvatarController : MonoBehaviour
 	public bool MirroredMovement = false;
 	
 	// Bool that determines whether the avatar will move or not in space.
-	// bool MovesInSpace = true;
+	// public bool MovesInSpace = true;
 	
 	// Bool that determines whether the avatar is allowed to jump -- vertical movement
 	// can cause some models to behave strangely, so use at your own discretion.
@@ -175,6 +175,7 @@ public class AvatarController : MonoBehaviour
 		
 		// re-calibrate the position offset
 		OffsetCalibrated = false;
+		Debug.Log("Calibrated");
 	}
 	
 	// Returns the correct bone index, depending on the mirroring
