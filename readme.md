@@ -1,4 +1,5 @@
 # SLOW AWKWARD GIANT ROBOT BATTLES
+## A lackadaisical duel of ungentlemanly leviathans on a planetary scale for two players on the Kinect.
 
 A 3D, motion controlled, physics based fighting game made by [Oliver](https://github.com/oligb) and [Matthew](https://github.com/drfuzzyness) for Game Studio 2 at NYU Poly.
 
