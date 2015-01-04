@@ -1,0 +1,109 @@
+﻿using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+
+public class PartPickTurnManager : MonoBehaviour {
+
+	public PlayerParts playerOne;
+	public PlayerParts playerTwo;
+	private int currentPlayer;
+	private int currentStage;
+	public GameObject primaryCamera;
+	public GameObject p1Camera;
+	public GameObject p2Camera;
+	public float transitionTime = 1.5f;
+	public List<int> partsInventory = new List<int>();
+	public string nextStage;
+
+//	private AbstractGoTween _cameraTween;
+	private Vector3 playerOneCameraTrans;
+	private Vector3 playerTwoCameraTrans;
+	private Vector3 playerOneCameraQuat;
+	private Vector3 playerTwoCameraQuat;
+
+
+
+	// Use this for initialization
+	void Start () {
+		currentPlayer = 0;
+		currentStage = 0;
+
+		// Get original locations for camera
+		playerOneCameraTrans = p1Camera.transform.position;
+		playerTwoCameraTrans = p2Camera.transform.position;
+		playerOneCameraQuat = p1Camera.transform.eulerAngles;
+		playerTwoCameraQuat = p2Camera.transform.eulerAngles;
+	}
+
+	public void advanceStage(){
+		if( currentStage < 3 ){
+			// 3 is max stage
+			if( currentPlayer == 0 ) {
+				iTween.RotateTo(primaryCamera, iTween.Hash("rotation", playerTwoCameraQuat, "time", transitionTime, "easetype", "easeInOutQuart") );
+				iTween.MoveTo(primaryCamera, iTween.Hash("position", playerTwoCameraTrans, "time", transitionTime, "easetype", "easeInOutQuart") );
+				currentPlayer = 1;
+				Debug.Log("current player = 2");
+			}
+			else {
+				iTween.RotateTo(primaryCamera, iTween.Hash("rotation", playerOneCameraQuat, "time", transitionTime, "easetype", "easeInOutQuart") );
+				iTween.MoveTo(primaryCamera, iTween.Hash("position", playerOneCameraTrans, "time", transitionTime, "easetype", "easeInOutQuart") );
+				currentPlayer = 0;
+				Debug.Log("current player = 1");
+			}
+			if( currentStage == 1 ) {
+				// Swap from guns to shields
+			}
+			currentStage++;
+		}
+		else {
+			advanceLevel();
+		}
+	}
+	
+	public void givePlayerPart( int partID ) {
+		if( partsInventory[ partID ] > 0 ) {
+			if( currentStage <= 1 ){
+				if( currentPlayer == 0 ) {
+					playerOne.setRightArm( partID );
+					PlayerPrefs.SetInt("P1-RightArm", partID );
+				}
+				else{
+					playerTwo.setRightArm( partID );
+					PlayerPrefs.SetInt("P2-RightArm", partID );
+				}
+			}
+			else{
+				if( currentPlayer == 0 ) {
+					playerOne.setLeftArm( partID );
+					PlayerPrefs.SetInt("P1-LeftArm", partID );
+				}
+				else {
+					playerTwo.setLeftArm( partID );
+					PlayerPrefs.SetInt("P2-LeftArm", partID );
+				}
+			}
+			advanceStage();
+		}
+		else{
+			// Alert! No more parts avaliable for this item
+			Debug.Log("Alert! No more parts for item " + partID + "!");
+		}
+	}
+
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+
+
+	private void advanceLevel() {
+		// Send data to next level
+
+		Application.LoadLevel( nextStage );
+	}
+
+
+}
